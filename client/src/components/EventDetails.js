@@ -9,10 +9,9 @@ import RouteIcon from '@mui/icons-material/Route';
 const commonAttributes = new Set([
   "time",
   "type",
-  "link",
 ])
 const blacklistedAttributes = new Set([
-  "actType"
+  "link",
 ])
 
 function getEventAttributes (event) {
@@ -72,12 +71,15 @@ export default function LinkDetails() {
         </Box>
 
         {/* Link */}
-        <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
-          <RouteIcon />
-          <Typography align="left" variant="subtitle1" paddingX={1}>
-            Location Link: {event.link}
-          </Typography>
-        </Box>
+        {
+          event.link != undefined &&
+          <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
+            <RouteIcon />
+            <Typography align="left" variant="subtitle1" paddingX={1}>
+              Location Link: {event.link}
+            </Typography>
+          </Box>
+        }
 
         <Divider textAlign="left" style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
 
