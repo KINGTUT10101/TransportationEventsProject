@@ -32,3 +32,5 @@ node_modules
 
 # Configuration
 .prettierrc
+database/raw_data/network.xml
+database/raw_data/output_events.xml
