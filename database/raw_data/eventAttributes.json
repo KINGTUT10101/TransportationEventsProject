@@ -1,0 +1,156 @@
+{
+    "actend": [
+        "type",
+        "actType",
+        "person",
+        "time",
+        "link"
+    ],
+    "departure": [
+        "type",
+        "person",
+        "time",
+        "legMode",
+        "link"
+    ],
+    "PersonEntersVehicle": [
+        "time",
+        "type",
+        "person",
+        "vehicle"
+    ],
+    "vehicle enters traffic": [
+        "type",
+        "person",
+        "time",
+        "relativePosition",
+        "networkMode",
+        "link",
+        "vehicle"
+    ],
+    "left link": [
+        "link",
+        "time",
+        "type",
+        "vehicle"
+    ],
+    "entered link": [
+        "link",
+        "time",
+        "type",
+        "vehicle"
+    ],
+    "travelled": [
+        "distance",
+        "type",
+        "person",
+        "time",
+        "mode"
+    ],
+    "arrival": [
+        "type",
+        "person",
+        "time",
+        "legMode",
+        "link"
+    ],
+    "actstart": [
+        "type",
+        "person",
+        "actType",
+        "time",
+        "x",
+        "y",
+        "link"
+    ],
+    "personMoney": [
+        "amount",
+        "purpose",
+        "transactionPartner",
+        "type",
+        "person",
+        "time"
+    ],
+    "dvrpTaskStarted": [
+        "dvrpMode",
+        "taskIndex",
+        "type",
+        "person",
+        "time",
+        "taskType",
+        "dvrpVehicle",
+        "link"
+    ],
+    "dvrpTaskEnded": [
+        "dvrpMode",
+        "taskIndex",
+        "type",
+        "person",
+        "time",
+        "taskType",
+        "dvrpVehicle",
+        "link"
+    ],
+    "vehicle leaves traffic": [
+        "type",
+        "person",
+        "time",
+        "relativePosition",
+        "networkMode",
+        "link",
+        "vehicle"
+    ],
+    "PersonLeavesVehicle": [
+        "time",
+        "type",
+        "person",
+        "vehicle"
+    ],
+    "passenger picked up": [
+        "vehicle",
+        "type",
+        "person",
+        "time",
+        "mode",
+        "request"
+    ],
+    "passenger dropped off": [
+        "vehicle",
+        "type",
+        "person",
+        "time",
+        "mode",
+        "request"
+    ],
+    "TransitDriverStarts": [
+        "vehicleId",
+        "transitRouteId",
+        "type",
+        "time",
+        "departureId",
+        "transitLineId",
+        "driverId"
+    ],
+    "VehicleArrivesAtFacility": [
+        "delay",
+        "type",
+        "facility",
+        "time",
+        "vehicle"
+    ],
+    "VehicleDepartsAtFacility": [
+        "delay",
+        "type",
+        "facility",
+        "time",
+        "vehicle"
+    ],
+    "waitingForPt": [
+        "destinationStop",
+        "agent",
+        "type",
+        "person",
+        "time",
+        "atStop"
+    ]
+}

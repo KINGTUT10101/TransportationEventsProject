@@ -1,0 +1,22 @@
+[
+    "actend",
+    "VehicleDepartsAtFacility",
+    "left link",
+    "entered link",
+    "passenger dropped off",
+    "PersonEntersVehicle",
+    "travelled",
+    "VehicleArrivesAtFacility",
+    "dvrpTaskEnded",
+    "TransitDriverStarts",
+    "waitingForPt",
+    "PersonLeavesVehicle",
+    "passenger picked up",
+    "dvrpTaskStarted",
+    "arrival",
+    "personMoney",
+    "vehicle enters traffic",
+    "actstart",
+    "departure",
+    "vehicle leaves traffic"
+]
