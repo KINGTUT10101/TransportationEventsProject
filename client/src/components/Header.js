@@ -24,7 +24,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const siteName = "CSP"
+const siteName = "TEP"
 const navItems = [
   {name: 'Home', path: '/'},
   {name: 'Search', path: '/search'},

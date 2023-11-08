@@ -10,8 +10,11 @@ import LinkDetails from "../components/LinkDetails"
 export default function Home() {
   return (
     <div>
-      <Typography variant="h4" align="center" paddingBottom={4}>
+      <Typography variant="h4" align="center" paddingBottom={1}>
         Welcome to the Transportation Events Project!
+      </Typography>
+      <Typography variant="subtitle2" align="center" paddingBottom={3}>
+        Click the search button in the top-right corner to begin
       </Typography>
 
       <Grid container padding={2} alignItems="flex-start" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center">

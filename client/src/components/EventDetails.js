@@ -14,11 +14,21 @@ const blacklistedAttributes = new Set([
   "link",
 ])
 
+/**
+ * Extracts event attributes that are not common or blacklisted into an array
+ * @param {Object} event Contains the attributes of an event
+ * @returns {Array} An array of attribute name strings
+ */
 function getEventAttributes (event) {
   const uniqueAttributes = Object.keys(event).filter(key => !commonAttributes.has(key) && !blacklistedAttributes.has(key));
   return [...uniqueAttributes];
 }
 
+/**
+ * Converts a time value into a string
+ * @param {Number} seconds The time in seconds 
+ * @returns {String} The time in HH:MM:SS format
+ */
 function secondsToTimeString (seconds) {
   return new Date(seconds * 1000).toISOString().slice(11, 19)
 }

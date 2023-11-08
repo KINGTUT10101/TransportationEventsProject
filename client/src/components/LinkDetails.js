@@ -5,6 +5,7 @@ import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import StraightenIcon from '@mui/icons-material/Straighten';
+import SpeedIcon from '@mui/icons-material/Speed';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SendIcon from '@mui/icons-material/Send';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
@@ -52,7 +53,7 @@ export default function LinkDetails () {
 
         {/* Freespeed */}
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
-          <StraightenIcon />
+          <SpeedIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
             Freespeed: 33 units/time
           </Typography>
@@ -86,7 +87,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <DirectionsCarIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Mode: car
+            Modes: car
           </Typography>
         </Box>
       </Paper>
