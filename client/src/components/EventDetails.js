@@ -72,7 +72,7 @@ export default function LinkDetails() {
 
         {/* Link */}
         {
-          event.link != undefined &&
+          event.link !== undefined &&
           <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
             <RouteIcon />
             <Typography align="left" variant="subtitle1" paddingX={1}>
@@ -81,7 +81,7 @@ export default function LinkDetails() {
           </Box>
         }
 
-        <Divider textAlign="left" style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
+        <Divider style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
 
         {/* Initial attributes */}
         {initialAttributes.map(attr => (
