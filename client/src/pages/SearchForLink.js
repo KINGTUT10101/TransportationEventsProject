@@ -14,7 +14,7 @@ export default function SearchForLink() {
 
       {/* We should autofill link IDs here if we have time */}
       <div style={{display: "flex", gap: "0.75rem", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
-        <TextField fullWidth label="Link ID" id="searchTerms" margin="normal" autoFocus />
+        <TextField fullWidth label="Link ID" id="searchTerms" margin="normal" autoFocus style={{maxWidth: "40rem"}} />
         <LinkDetails />
       </div>
 
