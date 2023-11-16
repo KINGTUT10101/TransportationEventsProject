@@ -1,15 +1,13 @@
 import { Routes, Route } from "react-router-dom"
-import Container from "@mui/material/Container"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Grid, Box } from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline';
 
 // Components
-import Header from "./components/Header"
-import Footer from "./components/Footer"
+import SideBar from "./components/SideBar";
 
 // Pages
 import Home from "./pages/Home"
-import Search from "./pages/Search"
 import EventsByLink from "./pages/EventsByLink"
 import EventsByPerson from "./pages/EventsByPerson"
 import EventsByTime from "./pages/EventsByTime"
@@ -35,19 +33,23 @@ function App() {
       <div style={style}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Header />
-        <Container sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
-          <Routes>
-            <Route path="/search/bylink" element={ <EventsByLink /> } />
-            <Route path="/search/byperson" element={ <EventsByPerson /> } />
-            <Route path="/search/bytime" element={ <EventsByTime /> } />
-            <Route path="/search/forlink" element={ <SearchForLink /> } />
-            <Route path="/search" element={ <Search /> } />
-            <Route path="/" element={ <Home /> } />
-            <Route path="*" element={ <NotFound /> } />
-          </Routes>
-        </Container>
-        <Footer />
+        <Grid container spacing={0} style={{height: "100vh"}}>
+          <Grid item xs={3} md={2}>
+            <SideBar />
+          </Grid>
+          <Grid item xs={9} md={10}>
+            <Box sx={{padding: "1rem"}}>
+              <Routes>
+                <Route path="/search/bylink" element={ <EventsByLink /> } />
+                <Route path="/search/byperson" element={ <EventsByPerson /> } />
+                <Route path="/search/bytime" element={ <EventsByTime /> } />
+                <Route path="/search/forlink" element={ <SearchForLink /> } />
+                <Route path="/" element={ <Home /> } />
+                <Route path="*" element={ <NotFound /> } />
+              </Routes>
+            </Box>
+          </Grid>
+        </Grid>
       </ThemeProvider>
       </div>
     </div>
