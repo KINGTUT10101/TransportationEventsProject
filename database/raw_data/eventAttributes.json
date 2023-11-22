@@ -48,7 +48,7 @@
         "mode"
     ],
     "arrival": [
-        "type",
+        "atype",
         "person",
         "time",
         "legMode",
