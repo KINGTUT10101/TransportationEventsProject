@@ -1,9 +1,25 @@
 {
+    "actstart": [
+        "type",
+        "person",
+        "actType",
+        "time",
+        "x",
+        "y",
+        "link"
+    ],
     "actend": [
         "type",
         "actType",
         "person",
         "time",
+        "link"
+    ],
+    "arrival": [
+        "type",
+        "person",
+        "time",
+        "legMode",
         "link"
     ],
     "departure": [
@@ -19,6 +35,12 @@
         "person",
         "vehicle"
     ],
+    "PersonLeavesVehicle": [
+        "time",
+        "type",
+        "person",
+        "vehicle"
+    ],
     "vehicle enters traffic": [
         "type",
         "person",
@@ -28,10 +50,13 @@
         "link",
         "vehicle"
     ],
-    "left link": [
-        "link",
-        "time",
+    "vehicle leaves traffic": [
         "type",
+        "person",
+        "time",
+        "relativePosition",
+        "networkMode",
+        "link",
         "vehicle"
     ],
     "entered link": [
@@ -40,36 +65,11 @@
         "type",
         "vehicle"
     ],
-    "travelled": [
-        "distance",
-        "type",
-        "person",
+    "left link": [
+        "link",
         "time",
-        "mode"
-    ],
-    "arrival": [
         "type",
-        "person",
-        "time",
-        "legMode",
-        "link"
-    ],
-    "actstart": [
-        "type",
-        "person",
-        "actType",
-        "time",
-        "x",
-        "y",
-        "link"
-    ],
-    "personMoney": [
-        "amount",
-        "purpose",
-        "transactionPartner",
-        "type",
-        "person",
-        "time"
+        "vehicle"
     ],
     "dvrpTaskStarted": [
         "dvrpMode",
@@ -91,21 +91,6 @@
         "dvrpVehicle",
         "link"
     ],
-    "vehicle leaves traffic": [
-        "type",
-        "person",
-        "time",
-        "relativePosition",
-        "networkMode",
-        "link",
-        "vehicle"
-    ],
-    "PersonLeavesVehicle": [
-        "time",
-        "type",
-        "person",
-        "vehicle"
-    ],
     "passenger picked up": [
         "vehicle",
         "type",
@@ -121,15 +106,6 @@
         "time",
         "mode",
         "request"
-    ],
-    "TransitDriverStarts": [
-        "vehicleId",
-        "transitRouteId",
-        "type",
-        "time",
-        "departureId",
-        "transitLineId",
-        "driverId"
     ],
     "VehicleArrivesAtFacility": [
         "delay",
@@ -152,5 +128,29 @@
         "person",
         "time",
         "atStop"
+    ],
+    "travelled": [
+        "distance",
+        "type",
+        "person",
+        "time",
+        "mode"
+    ],
+    "personMoney": [
+        "amount",
+        "purpose",
+        "transactionPartner",
+        "type",
+        "person",
+        "time"
+    ],
+    "TransitDriverStarts": [
+        "vehicleId",
+        "transitRouteId",
+        "type",
+        "time",
+        "departureId",
+        "transitLineId",
+        "driverId"
     ]
 }
