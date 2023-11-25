@@ -7,7 +7,8 @@ CREATE TABLE node (
 CREATE TABLE links_metadata (
 	links_metadata_id TEXT PRIMARY KEY,
 	effective_cell_size DECIMAL,
-	effective_lane_width DECIMAL
+	effective_lane_width DECIMAL,
+	capperiod TEXT
 );
 
 CREATE TABLE link (
