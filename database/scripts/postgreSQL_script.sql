@@ -20,6 +20,7 @@ CREATE TABLE link (
 	permlanes DECIMAL,
 	oneway BOOLEAN,
 	modes TEXT,
+	link_length DECIMAL,
 	FOREIGN KEY (links_metadata_id) REFERENCES links_metadata(links_metadata_id),
 	FOREIGN KEY (from_node) REFERENCES node(node_id),
 	FOREIGN KEY (to_node) REFERENCES node(node_id)
