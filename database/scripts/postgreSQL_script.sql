@@ -1,110 +1,118 @@
-CREATE TABLE Node (
-	"node id" INT PRIMARY KEY,
+CREATE TABLE node (
+	node_id TEXT PRIMARY KEY,
 	x DECIMAL,
 	y DECIMAL
 );
 
-CREATE TABLE Link (
-	"link id" VARCHAR(255) PRIMARY KEY,
-	from INT,
-	to INT,
+CREATE TABLE links_metadata (
+	links_metadata_id TEXT PRIMARY KEY,
+	effective_cell_size DECIMAL,
+	effective_lane_width DECIMAL
+);
+
+CREATE TABLE link (
+	link_id TEXT PRIMARY KEY,
+	links_metadata_id TEXT,
+	from_node TEXT,
+	to_node TEXT,
 	freespeed DECIMAL,
 	capacity DECIMAL,
 	permlanes DECIMAL,
 	oneway BOOLEAN,
 	modes TEXT,
-	FOREIGN KEY (from) REFERENCES Node("node id"),
-	FOREIGN KEY (to) REFERENCES Node("node id")
+	FOREIGN KEY (links_metadata_id) REFERENCES links_metadata(links_metadata_id),
+	FOREIGN KEY (from_node) REFERENCES node(node_id),
+	FOREIGN KEY (to_node) REFERENCES node(node_id)
 );
 
-CREATE TABLE "event" (
-	eventID SERIAL PRIMARY KEY,
-	time DECIMAL NOT NULL,
-	person VARCHAR(255),
-	vehicle VARCHAR(255)
+CREATE TABLE event_data (
+	event_id SERIAL PRIMARY KEY,
+	event_time DECIMAL NOT NULL,
+	person TEXT,
+	vehicle TEXT
 );
-CREATE TABLE actEnd (
-	eventID INT,
-	FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-	type VARCHAR(255)
+CREATE TABLE act_end (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	act_type TEXT
 );
-CREATE TABLE dvrpTask (
-	eventID INT,
-	FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-	dvrpVehicle VARCHAR(255),
-	taskType VARCHAR(255),
-	taskIndex VARCHAR(255),
-	dvrpMode VARCHAR
+CREATE TABLE dvrp_task (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	dvrp_vehicle TEXT,
+	task_type TEXT,
+	task_index TEXT,
+	dvrp_mode TEXT
 );
-CREATE TABLE EnterLeftLink (
-	eventID INT,
-	FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-	start BOOLEAN
+CREATE TABLE enter_left_link (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	is_start BOOLEAN
 );
-CREATE TABLE actStart (
-	eventID INT,
-	FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-	type VARCHAR(255),
+CREATE TABLE act_start (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	act_type TEXT,
 	x DECIMAL,
 	y DECIMAL
 );
-CREATE TABLE arrivalDeparture (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-legmode VARCHAR(255),
-start BOOLEAN
+CREATE TABLE arrival_departure (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	legmode TEXT,
+	is_start BOOLEAN
 );
-CREATE TABLE vehicleTraffic (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-relativePosition DECIMAL,
-networkMode VARCHAR(255),
-start BOOLEAN
+CREATE TABLE vehicle_traffic (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	relative_position DECIMAL,
+	network_mode TEXT,
+	is_start BOOLEAN
 );
 CREATE TABLE travelled (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-mode VARCHAR(255),
-distance DECIMAL
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	mode TEXT,
+	distance DECIMAL
 );
-CREATE TABLE transitDriverStarts (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-driverId VARCHAR(255),
-vehicleId VARCHAR(255),
-departureId VARCHAR(255),
-transitLineId VARCHAR(255),
-transitRouteId VARCHAR(255)
+CREATE TABLE transit_driver_starts (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	driver_id TEXT,
+	vehicle_id TEXT,
+	departure_id TEXT,
+	transitLine_id TEXT,
+	transitRoute_id TEXT
 );
-CREATE TABLE passengerPickDrop (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-request VARCHAR(255),
-mode VARCHAR(255),
-start BOOLEAN
+CREATE TABLE passenger_pick_drop (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	request TEXT,
+	mode TEXT,
+	is_start BOOLEAN
 );
-CREATE TABLE vehicleFacility (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-delay DECIMAL,
-facility VARCHAR(255)
+CREATE TABLE vehicle_facility (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	time_delay DECIMAL,
+	facility TEXT
 );
-CREATE TABLE personVehicle (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-start BOOLEAN
+CREATE TABLE person_vehicle (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	is_start BOOLEAN
 );
-CREATE TABLE waitingForPt (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-destinationStop DECIMAL,
-atStop DECIMAL,
-agent VARCHAR(255)
+CREATE TABLE waiting_for_pt (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	destination_stop DECIMAL,
+	at_stop DECIMAL,
+	agent TEXT
 );
-CREATE TABLE personMoney (
-eventID INT,
-FOREIGN KEY (eventID) REFERENCES "event"(eventID),
-transactionPartner VARCHAR(255),
-amount DECIMAL,
-purpose VARCHAR(255)
+CREATE TABLE person_money (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	transaction_partner TEXT,
+	amount DECIMAL,
+	purpose TEXT
 );
