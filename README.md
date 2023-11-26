@@ -6,15 +6,19 @@ The final project for Database Theory and Design
 
 Make sure [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is installed
 
-Run “git clone [https://github.com/KINGTUT10101/ContentSharingPlatform.git”](https://github.com/KINGTUT10101/ContentSharingPlatform.git”)
+Run “git clone [https://github.com/KINGTUT10101/TransportationEventsProject.git”](https://github.com/KINGTUT10101/TransportationEventsProject.git”)
 
-Run “cd ContentSharingPlatform”
+Run “cd TransportationEventsProject”
 
 Run “npm install”
 
 Run “cd client”
 
 Run "npm install" again
+
+Run "cd ../server"
+
+Run "npm install" once again
 
 ## Running the project
 
