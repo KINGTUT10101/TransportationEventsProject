@@ -127,3 +127,14 @@ FROM event_data a LEFT JOIN act_end ON (a.event_id = act_end.event_id)
 	 LEFT JOIN travelled ON (a.event_id = travelled.event_id)
 	 LEFT JOIN vehicle_traffic ON (a.event_id = vehicle_traffic.event_id)
 	 LEFT JOIN waiting_for_pt ON (a.event_id = waiting_for_pt.event_id)
+
+CREATE VIEW megalinkview AS
+SELECT a.*,act_end.act_type AS actend_type,act_start.act_type AS actstart_type,
+	act_start.x,act_start.y,arrival_departure.legmode,dvrp_task.dvrp_vehicle,
+	dvrp_task.task_type,dvrp_task.task_index,dvrp_task.dvrp_mode,
+	vehicle_traffic.relative_position,vehicle_traffic.network_mode
+FROM event_data a LEFT JOIN act_end ON (a.event_id = act_end.event_id)
+	 LEFT JOIN act_start ON (a.event_id = act_start.event_id)
+	 LEFT JOIN arrival_departure ON (a.event_id = arrival_departure.event_id)
+	 LEFT JOIN dvrp_task ON (a.event_id = dvrp_task.event_id)
+	 LEFT JOIN vehicle_traffic ON (a.event_id = vehicle_traffic.event_id)
