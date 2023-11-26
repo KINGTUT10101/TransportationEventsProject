@@ -31,12 +31,24 @@ CREATE TABLE event_data (
 	event_id SERIAL PRIMARY KEY,
 	event_time DECIMAL NOT NULL,
 	person TEXT,
-	vehicle TEXT
+	vehicle TEXT,
+	event_type TEXT
+);
+CREATE TABLE act_start (
+	event_id INT,
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	act_type TEXT,
+	x DECIMAL,
+	y DECIMAL,
+	link_id TEXT,
+	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
 CREATE TABLE act_end (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	act_type TEXT
+	act_type TEXT,
+	link_id TEXT,
+	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
 CREATE TABLE dvrp_task (
 	event_id INT,
@@ -44,32 +56,33 @@ CREATE TABLE dvrp_task (
 	dvrp_vehicle TEXT,
 	task_type TEXT,
 	task_index TEXT,
-	dvrp_mode TEXT
+	dvrp_mode TEXT,
+	link_id TEXT,
+	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
 CREATE TABLE enter_left_link (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	is_start BOOLEAN
-);
-CREATE TABLE act_start (
-	event_id INT,
-	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	act_type TEXT,
-	x DECIMAL,
-	y DECIMAL
+	is_start BOOLEAN,
+	link_id TEXT,
+	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
 CREATE TABLE arrival_departure (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	legmode TEXT,
-	is_start BOOLEAN
+	is_start BOOLEAN,
+	link_id TEXT,
+	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
 CREATE TABLE vehicle_traffic (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	relative_position DECIMAL,
 	network_mode TEXT,
-	is_start BOOLEAN
+	is_start BOOLEAN,
+	link_id TEXT,
+	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
 CREATE TABLE travelled (
 	event_id INT,
@@ -83,8 +96,8 @@ CREATE TABLE transit_driver_starts (
 	driver_id TEXT,
 	vehicle_id TEXT,
 	departure_id TEXT,
-	transitLine_id TEXT,
-	transitRoute_id TEXT
+	transit_line_id TEXT,
+	transit_route_id TEXT
 );
 CREATE TABLE passenger_pick_drop (
 	event_id INT,

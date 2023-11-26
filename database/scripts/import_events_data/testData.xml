@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<events version="1.0">
+    <event time_val="86397.0" type="left link" link="115872609_12" vehicle="p_5600"  />
+    <event time_val="86557.0" type="middle link" link="1142412609_12" vehicle="p_348"  />
+    <event time_val="526397.0" type="left link" link="24145872609_12" vehicle="p_fhf"  />
+    <event time_val="897.0" type="right link" link="115821412409_12" vehicle="p_5600"  />
+</events>
