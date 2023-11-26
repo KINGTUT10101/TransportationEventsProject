@@ -41,16 +41,12 @@ CREATE TABLE act_start (
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	act_type TEXT,
 	x DECIMAL,
-	y DECIMAL,
-	link_id TEXT,
-	FOREIGN KEY (link_id) REFERENCES link(link_id)
+	y DECIMAL
 );
 CREATE TABLE act_end (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	act_type TEXT,
-	link_id TEXT,
-	FOREIGN KEY (link_id) REFERENCES link(link_id)
+	act_type TEXT
 );
 CREATE TABLE dvrp_task (
 	event_id INT,
@@ -58,33 +54,18 @@ CREATE TABLE dvrp_task (
 	dvrp_vehicle TEXT,
 	task_type TEXT,
 	task_index TEXT,
-	dvrp_mode TEXT,
-	link_id TEXT,
-	FOREIGN KEY (link_id) REFERENCES link(link_id)
-);
-CREATE TABLE enter_left_link (
-	event_id INT,
-	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	is_start BOOLEAN,
-	link_id TEXT,
-	FOREIGN KEY (link_id) REFERENCES link(link_id)
+	dvrp_mode TEXT
 );
 CREATE TABLE arrival_departure (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	legmode TEXT,
-	is_start BOOLEAN,
-	link_id TEXT,
-	FOREIGN KEY (link_id) REFERENCES link(link_id)
+	legmode TEXT
 );
 CREATE TABLE vehicle_traffic (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	relative_position DECIMAL,
-	network_mode TEXT,
-	is_start BOOLEAN,
-	link_id TEXT,
-	FOREIGN KEY (link_id) REFERENCES link(link_id)
+	network_mode TEXT
 );
 CREATE TABLE travelled (
 	event_id INT,
@@ -105,19 +86,13 @@ CREATE TABLE passenger_pick_drop (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	request TEXT,
-	mode TEXT,
-	is_start BOOLEAN
+	mode TEXT
 );
 CREATE TABLE vehicle_facility (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	time_delay DECIMAL,
 	facility TEXT
-);
-CREATE TABLE person_vehicle (
-	event_id INT,
-	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	is_start BOOLEAN
 );
 CREATE TABLE waiting_for_pt (
 	event_id INT,
@@ -133,3 +108,24 @@ CREATE TABLE person_money (
 	amount DECIMAL,
 	purpose TEXT
 );
+
+CREATE VIEW megapersonview AS
+SELECT a.*,act_end.act_type AS actend_type,act_start.act_type AS actstart_type,
+	act_start.x,act_start.y,arrival_departure.legmode,
+	dvrp_task.dvrp_vehicle,dvrp_task.task_type,dvrp_task.task_index,
+	dvrp_task.dvrp_mode,passenger_pick_drop.request,
+	passenger_pick_drop.mode AS passenger_mode,person_money.transaction_partner,
+	person_money.amount,person_money.purpose,person_vehicle.is_start,
+	travelled.mode AS travel_mode,travelled.distance,
+	vehicle_traffic.relative_position,vehicle_traffic.network_mode,
+	waiting_for_pt.destination_stop,waiting_for_pt.at_stop,waiting_for_pt.agent
+FROM event_data a LEFT JOIN act_end ON (a.event_id = act_end.event_id)
+	 LEFT JOIN act_start ON (a.event_id = act_start.event_id)
+	 LEFT JOIN arrival_departure ON (a.event_id = arrival_departure.event_id)
+	 LEFT JOIN dvrp_task ON (a.event_id = dvrp_task.event_id)
+	 LEFT JOIN passenger_pick_drop ON (a.event_id = passenger_pick_drop.event_id)
+	 LEFT JOIN person_money ON (a.event_id = person_money.event_id)
+	 LEFT JOIN person_vehicle ON (a.event_id = person_vehicle.event_id)
+	 LEFT JOIN travelled ON (a.event_id = travelled.event_id)
+	 LEFT JOIN vehicle_traffic ON (a.event_id = vehicle_traffic.event_id)
+	 LEFT JOIN waiting_for_pt ON (a.event_id = waiting_for_pt.event_id)
