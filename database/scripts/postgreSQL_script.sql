@@ -138,3 +138,28 @@ FROM event_data a LEFT JOIN act_end ON (a.event_id = act_end.event_id)
 	 LEFT JOIN arrival_departure ON (a.event_id = arrival_departure.event_id)
 	 LEFT JOIN dvrp_task ON (a.event_id = dvrp_task.event_id)
 	 LEFT JOIN vehicle_traffic ON (a.event_id = vehicle_traffic.event_id)
+
+CREATE VIEW megaview AS
+SELECT a.*,act_end.act_type AS actend_type,act_start.act_type AS actstart_type,
+	act_start.x,act_start.y,arrival_departure.legmode,
+	dvrp_task.dvrp_vehicle,dvrp_task.task_type,dvrp_task.task_index,
+	dvrp_task.dvrp_mode,passenger_pick_drop.request,vehicle_facility.facility,
+	passenger_pick_drop.mode AS passenger_mode,person_money.transaction_partner,
+	person_money.amount,person_money.purpose,travelled.mode AS travel_mode,
+	travelled.distance,vehicle_traffic.relative_position,vehicle_traffic.network_mode,
+	waiting_for_pt.destination_stop,waiting_for_pt.at_stop,waiting_for_pt.agent,
+	vehicle_facility.time_delay,transit_driver_starts.driver_id,
+	transit_driver_starts.vehicle_id,transit_driver_starts.departure_id,
+	transit_driver_starts.transitline_id,transit_driver_starts.transitroute_id
+FROM event_data a LEFT JOIN act_end ON (a.event_id = act_end.event_id)
+	 LEFT JOIN act_start ON (a.event_id = act_start.event_id)
+	 LEFT JOIN arrival_departure ON (a.event_id = arrival_departure.event_id)
+	 LEFT JOIN dvrp_task ON (a.event_id = dvrp_task.event_id)
+	 LEFT JOIN passenger_pick_drop ON (a.event_id = passenger_pick_drop.event_id)
+	 LEFT JOIN person_money ON (a.event_id = person_money.event_id)
+	 LEFT JOIN person_vehicle ON (a.event_id = person_vehicle.event_id)
+	 LEFT JOIN travelled ON (a.event_id = travelled.event_id)
+	 LEFT JOIN vehicle_traffic ON (a.event_id = vehicle_traffic.event_id)
+	 LEFT JOIN waiting_for_pt ON (a.event_id = waiting_for_pt.event_id)
+	 LEFT JOIN vehicle_facility ON (a.event_id = vehicle_facility.event_id)
+	 LEFT JOIN transit_driver_starts ON (a.event_id = transit_driver_starts.event_id)
