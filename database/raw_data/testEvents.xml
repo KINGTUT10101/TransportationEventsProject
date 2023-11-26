@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<events version="1.0">
+	<event time="20.0" type="actend" person="p_9031" link="7742288_0" actType="Home"  />
+	<event time="20.0" type="departure" person="p_9031" link="7742288_0" legMode="car"  />
+	<event time="20.0" type="PersonEntersVehicle" person="p_9031" vehicle="p_9031"  />
+	<event time="20.0" type="vehicle enters traffic" person="p_9031" link="7742288_0" vehicle="p_9031" networkMode="car" relativePosition="1.0"  />
+	<event time="21.0" type="left link" link="7742288_0" vehicle="p_9031"  />
+	<event time="21.0" type="entered link" link="7742288_0_r" vehicle="p_9031"  />
+	<event time="31.0" type="left link" link="7742288_0_r" vehicle="p_9031"  />
+	<event time="31.0" type="entered link" link="7765210_3_r" vehicle="p_9031"  />
+	<event time="60.0" type="actend" person="p_1217" link="7736644_2" actType="Uber_Source_Act"  />
+	<event time="60.0" type="departure" person="p_1217" link="7736644_2" legMode="walk"  />
+</events>

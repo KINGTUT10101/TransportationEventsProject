@@ -13,7 +13,7 @@ const typeMap = {
   "waitingForPt": "waiting_for_pt",
   "PersonLeavesVehicle": "person_vehicle",
   "passenger picked up": "passenger_pick_drop",
-  "dvrpTaskStarted": "drvp_task",
+  "dvrpTaskStarted": "dvrp_task",
   "arrival": "arrival_departure",
   "personMoney": "person_money",
   "vehicle enters traffic": "vehicle_traffic",
