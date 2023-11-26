@@ -30,6 +30,7 @@ CREATE TABLE link (
 CREATE TABLE event_data (
 	event_id SERIAL PRIMARY KEY,
 	event_time DECIMAL NOT NULL,
+	link_id TEXT REFERENCES link,
 	person TEXT,
 	vehicle TEXT,
 	event_type TEXT
