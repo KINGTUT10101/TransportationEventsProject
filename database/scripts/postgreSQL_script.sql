@@ -63,7 +63,6 @@ CREATE TABLE dvrp_task (
 CREATE TABLE enter_left_link (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	is_start BOOLEAN,
 	link_id TEXT,
 	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
@@ -71,7 +70,6 @@ CREATE TABLE arrival_departure (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	legmode TEXT,
-	is_start BOOLEAN,
 	link_id TEXT,
 	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
@@ -80,7 +78,6 @@ CREATE TABLE vehicle_traffic (
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	relative_position DECIMAL,
 	network_mode TEXT,
-	is_start BOOLEAN,
 	link_id TEXT,
 	FOREIGN KEY (link_id) REFERENCES link(link_id)
 );
@@ -104,7 +101,6 @@ CREATE TABLE passenger_pick_drop (
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	request TEXT,
 	mode TEXT,
-	is_start BOOLEAN
 );
 CREATE TABLE vehicle_facility (
 	event_id INT,
@@ -112,10 +108,10 @@ CREATE TABLE vehicle_facility (
 	time_delay DECIMAL,
 	facility TEXT
 );
+-- Not technically needed, but might be helpful if we need to add more data later on
 CREATE TABLE person_vehicle (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
-	is_start BOOLEAN
 );
 CREATE TABLE waiting_for_pt (
 	event_id INT,
