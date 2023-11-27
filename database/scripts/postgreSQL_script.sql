@@ -100,7 +100,7 @@ CREATE TABLE passenger_pick_drop (
 	event_id INT,
 	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
 	request TEXT,
-	mode TEXT,
+	mode TEXT
 );
 CREATE TABLE vehicle_facility (
 	event_id INT,
@@ -111,7 +111,7 @@ CREATE TABLE vehicle_facility (
 -- Not technically needed, but might be helpful if we need to add more data later on
 CREATE TABLE person_vehicle (
 	event_id INT,
-	FOREIGN KEY (event_id) REFERENCES event_data(event_id),
+	FOREIGN KEY (event_id) REFERENCES event_data(event_id)
 );
 CREATE TABLE waiting_for_pt (
 	event_id INT,
