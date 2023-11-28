@@ -19,25 +19,25 @@ GROUP BY person;
 
 /*4D. Calculate the average time it takes for persons to complete their "actend" activities.
   Display the results in ascending order of average time.*/
-SELECT person, avg(totalTime)
-FROM (SELECT e.person, (s.event_time - e.event_time) AS totaltime
-	FROM (event_data e NATURAL JOIN act_end z)
-	INNER JOIN (event_data s NATURAL JOIN act_start a) ON (e.person = s.person)
-	WHERE z.act_type != a.act_type)
-GROUP BY person
-ORDER BY avg;
-/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  SUPER untrustworthy; needs further testing*/
-
-/*
-  alt simpler one that might be what he meant?
-  I mean, none of the other ones are anywhere near this complicated
-
-    SELECT person, avg(event_time)
-    FROM event_data NATURAL JOIN act_end
-    GROUP BY person
-    ORDER BY avg;
-*/
+SELECT 
+    end_events.person, 
+    AVG(start_events.event_time - end_events.event_time) AS average_time_to_next_actstart
+FROM 
+    event_data AS end_events
+JOIN 
+    event_data AS start_events ON end_events.person = start_events.person
+JOIN 
+    act_end ON end_events.event_id = act_end.event_id
+JOIN 
+    act_start ON start_events.event_id = act_start.event_id
+WHERE 
+    end_events.event_type = 'actend'
+    AND start_events.event_type = 'actstart'
+    AND start_events.event_time > end_events.event_time
+GROUP BY 
+    end_events.person
+ORDER BY 
+    average_time_to_next_actstart ASC;
 
 /*4E. Retrieve the earliest "departure" time for each person who used the "car" mode*/
 SELECT person, min(event_time)
