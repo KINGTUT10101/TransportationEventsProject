@@ -6,6 +6,7 @@ const commonColumnMap = {
   vehicle: "vehicle",
   vehicleId: "vehicle",
   driverId: "person",
+  link: "link_id",
 }
 
 export default commonColumnMap
