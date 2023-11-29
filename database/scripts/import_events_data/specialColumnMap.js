@@ -3,20 +3,16 @@ const specialColumnMap = {
   "actstart": {
       "actType": "act_type",
       "x": "x",
-      "y": "y",
-      "link": "link_id",
+      "y": "y"
   },
   "actend": {
-      "actType": "act_type",
-      "link": "link_id"
+      "actType": "act_type"
   },
   "arrival": {
-      "legMode": "leg_mode",
-      "link": "link_id",
+      "legMode": "legmode"
   },
   "departure": {
-      "legMode": "leg_mode",
-      "link": "link_id"
+      "legMode": "legmode"
   },
   "PersonEntersVehicle": {
 
@@ -26,33 +22,29 @@ const specialColumnMap = {
   },
   "vehicle enters traffic": {
       "relativePosition": "relative_position",
-      "networkMode": "network_mode",
-      "link": "link_id",
+      "networkMode": "network_mode"
   },
   "vehicle leaves traffic": {
       "relativePosition": "relative_position",
-      "networkMode": "network_mode",
-      "link": "link_id",
+      "networkMode": "network_mode"
   },
   "entered link": {
-      "link": "link_id",
+
   },
   "left link": {
-      "link": "link_id",
+
   },
   "dvrpTaskStarted": {
       "dvrpMode": "dvrp_mode",
       "taskIndex": "task_index",
       "taskType": "task_type",
-      "dvrpVehicle": "dvrp_vehicle",
-      "link": "link_id"
+      "dvrpVehicle": "dvrp_vehicle"
   },
   "dvrpTaskEnded": {
       "dvrpMode": "dvrp_mode",
       "taskIndex": "task_index",
       "taskType": "task_type",
-      "dvrpVehicle": "dvrp_vehicle",
-      "link": "link_id"
+      "dvrpVehicle": "dvrp_vehicle"
   },
   "passenger picked up": {
       "mode": "mode",
