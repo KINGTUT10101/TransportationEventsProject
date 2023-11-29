@@ -23,7 +23,7 @@ router.get('/person/:personID', async (req, res) => {
     const result = await db.query(`SELECT *
                                    FROM megapersonview
                                    WHERE person = $1
-                                   ORDER BY event_time
+                                   ORDER BY event_time, event_id
                                    LIMIT $2 OFFSET $3;`,[pid,limit,offset]);
     if (result.rows.length === 0) res.status(404).send('Not Found');
     else res.status(200).send(result.rows);
@@ -42,7 +42,7 @@ router.get('/event/:linkID', async (req, res) => {
     const result = await db.query(`SELECT *
                                    FROM megalinkview
                                    WHERE link_id = $1
-                                   ORDER BY event_time;`,[lid]);
+                                   ORDER BY event_time, event_id;`,[lid]);
     if (result.rows.length === 0) res.status(404).send('Not Found');
     else res.status(200).send(result.rows);
   }catch (error) {
@@ -81,7 +81,7 @@ router.get('/range', async (req, res) => {
     const result = await db.query(`SELECT * 
                                    FROM megaview
                                    WHERE event_time BETWEEN $1 AND $2
-                                   ORDER BY event_time;`,[min,max]);
+                                   ORDER BY event_time, event_id;`,[min,max]);
     if (result.rows.length === 0) res.status(404).send('Not Found');
     else res.status(200).send(result.rows);
   }catch (error) {
