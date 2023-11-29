@@ -15,7 +15,8 @@ WHERE link_id = '7735018_0';
 SELECT person, sum(distance) 
 FROM event_data NATURAL JOIN travelled
 WHERE mode = 'walk'
-GROUP BY person;
+GROUP BY person
+ORDER BY sum DESC;
 
 /*4D. Calculate the average time it takes for persons to complete their "actend" activities.
   Display the results in ascending order of average time.*/
@@ -42,5 +43,5 @@ ORDER BY
 /*4E. Retrieve the earliest "departure" time for each person who used the "car" mode*/
 SELECT person, min(event_time)
 FROM event_data NATURAL JOIN arrival_departure
-WHERE legmode = 'car' AND is_start = FALSE
+WHERE legmode = 'car' AND event_type = 'departure'
 GROUP BY person;
