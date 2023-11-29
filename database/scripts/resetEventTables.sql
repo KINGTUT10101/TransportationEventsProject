@@ -1,0 +1,14 @@
+DELETE FROM act_start;
+DELETE FROM act_end;
+DELETE FROM dvrp_task;
+DELETE FROM enter_left_link;
+DELETE FROM arrival_departure;
+DELETE FROM vehicle_traffic;
+DELETE FROM travelled;
+DELETE FROM transit_driver_starts;
+DELETE FROM passenger_pick_drop;
+DELETE FROM vehicle_facility;
+DELETE FROM person_vehicle;
+DELETE FROM waiting_for_pt;
+DELETE FROM person_money;
+DELETE FROM event_data;
