@@ -85,7 +85,7 @@ router.get('/range', async (req, res) => {
     if (result.rows.length === 0) res.status(404).send('Not Found');
     else res.status(200).send(result.rows);
   }catch (error) {
-    console.error('Error in /comments/:CommentID', error);
+    console.error('Error', error);
     res.status(500).send('Server error');
   }
 });
