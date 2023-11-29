@@ -11,11 +11,11 @@ const specialColumnMap = {
       "link": "link_id"
   },
   "arrival": {
-      "legMode": "leg_mode",
+      "legMode": "legmode",
       "link": "link_id",
   },
   "departure": {
-      "legMode": "leg_mode",
+      "legMode": "legmode",
       "link": "link_id"
   },
   "PersonEntersVehicle": {
