@@ -120,6 +120,10 @@ CREATE TABLE person_money (
 /*Indexes*/
 CREATE INDEX ev_time ON event_data USING BTREE(event_time);
 CREATE INDEX ev_link ON event_data USING BTREE(link_id);
+CREATE INDEX idx_event_data_event_type ON event_data(event_type);
+CREATE INDEX idx_act_start_link_id ON act_start(link_id);
+CREATE INDEX idx_act_end_link_id ON act_end(link_id);
+
 
 /*Views*/
 CREATE VIEW megaview AS
