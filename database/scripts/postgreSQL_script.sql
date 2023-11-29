@@ -117,10 +117,11 @@ CREATE TABLE person_money (
 	purpose TEXT
 );
 
+/*Indexes*/
 CREATE INDEX ev_time ON event_data USING BTREE(event_time);
 CREATE INDEX ev_link ON event_data USING BTREE(link_id);
-CREATE INDEX ev_person ON event_data USING BTREE(person);
 
+/*Views*/
 CREATE VIEW megaview AS
 SELECT a.*,act_end.act_type AS actend_type,act_start.act_type AS actstart_type,
 	act_start.x,act_start.y,arrival_departure.legmode,
