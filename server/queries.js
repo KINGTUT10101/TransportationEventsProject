@@ -60,7 +60,7 @@ router.get('/link/:linkID', async (req, res) => {
                                    FROM link
                                    WHERE link_id = $1`,[lid]);
     if (result.rows.length === 0) res.status(404).send('Not Found');
-    else res.status(200).send(result.rows);
+    else res.status(200).send(result.rows[0]);
   }catch (error) {
     console.error('Error', error);
     res.status(500).send('Server error');
