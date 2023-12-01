@@ -15,7 +15,9 @@ export default function EventsByLink() {
   const [eventsData, setEventsData] = React.useState([]);
 
   async function getData () {
-    axios.get(`/api/event/${linkID}`).then((response) => {
+    setWaiting (true)
+
+    await axios.get(`/api/event/${linkID}`).then((response) => {
       setEventsData(response.data);
     }).catch ((err) => {
       alert ("Error fetching content (please check that the ID is correct)\n" + err)

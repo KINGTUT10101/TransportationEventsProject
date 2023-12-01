@@ -38,6 +38,8 @@ function secondsToTimeString (seconds) {
   return new Date(seconds * 1000).toISOString().slice(11, 19)
 }
 
+// TODO: only display the common attributes at first. When a user hits "show more", make a request to get the rest of the data
+// This would reduce the amount of null values in the initial request
 export default function LinkDetails({ data }) {
   const [showMore, setShowMore] = useState(false);
   const attributesToShow = getEventAttributes(data);

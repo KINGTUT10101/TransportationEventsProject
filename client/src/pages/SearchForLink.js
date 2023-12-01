@@ -16,7 +16,7 @@ export default function SearchForLink() {
   async function getData () {
     setWaiting (true)
 
-    axios.get(`/api/link/${linkID}`).then((response) => {
+    await axios.get(`/api/link/${linkID}`).then((response) => {
       setLinkData(response.data);
     }).catch ((err) => {
       alert ("Error fetching content (please check that the ID is correct)\n" + err)
