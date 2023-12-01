@@ -1,4 +1,4 @@
-import { Typography, TextField, Pagination, Button } from '@mui/material';
+import { Typography, TextField, Button, Divider } from '@mui/material';
 import axios from "axios";
 import React from "react";
 import LinkDetails from '../components/LinkDetails';
@@ -13,9 +13,9 @@ export default function SearchForLink() {
   const [linkID, setLinkID] = React.useState("");
   const [linkData, setLinkData] = React.useState(null);
 
-  function getData () {
+  async function getData () {
     setWaiting (true)
-  
+
     axios.get(`/api/link/${linkID}`).then((response) => {
       setLinkData(response.data);
     }).catch ((err) => {
@@ -51,6 +51,8 @@ export default function SearchForLink() {
             Search
           </Button>
         </div>
+
+        <Divider style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
 
         {
           linkData !== null &&
