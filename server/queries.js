@@ -8,6 +8,8 @@ process.on('uncaughtException', function (err) {
   console.log(err);
 });
 
+// Used to get the special attributes for an event
+// /specialEventData/{eventType}/{eventID}
 router.get('/specialEventData/:eventType/:eventID', async (req, res) => {
   try{
     const eid = req.params.eventID; // Event ID
@@ -25,9 +27,8 @@ router.get('/specialEventData/:eventType/:eventID', async (req, res) => {
   }
 });
 
-/*a. Search events by person ID to return all events for a specific person. Display the 
-  events on the screen and choose an appropriate number of attributes to show.
-  Events should be sorted out by time.*/
+// Gets a page of event data associated with a person ID
+// /person/{personID}?page={page}&count={count}
 router.get('/person/:personID', async (req, res) => {
   try{
     // Get the page and offset for the query
@@ -51,6 +52,8 @@ router.get('/person/:personID', async (req, res) => {
   }
 });
 
+// Counts the number of events associated with a person ID
+// /count/person/{personID}
 router.get('/count/person/:personID', async (req, res) => {
   try{
     const pid = req.params.personID;
@@ -66,8 +69,8 @@ router.get('/count/person/:personID', async (req, res) => {
   }
 });
 
-/*b. Search events by link ID to return all events for that specific link. Events should 
-  be sorted out by time.*/
+// Gets a page of event data associated with a link ID
+// /event/{linkID}?page={page}&count={count}
 router.get('/event/:linkID', async (req, res) => {
   try{
     // Get the page and offset for the query
@@ -91,6 +94,8 @@ router.get('/event/:linkID', async (req, res) => {
   }
 });
 
+// Counts the number of events associated with a link ID
+// /count/event/{linkID}
 router.get('/count/event/:linkID', async (req, res) => {
   try{
     const lid = req.params.linkID;
@@ -106,7 +111,8 @@ router.get('/count/event/:linkID', async (req, res) => {
   }
 });
 
-/*c. Given a link ID, show the link details like freespeed, capacity and modes.*/
+// Gets the data of a specific link
+// /link/{linkID}
 router.get('/link/:linkID', async (req, res) => {
   try{
     const lid = req.params.linkID;
@@ -122,9 +128,8 @@ router.get('/link/:linkID', async (req, res) => {
   }
 });
 
-/*d. Get all the events in a specific time range (e.g., between 7:00 and 8:00 AM) for a 
-  specific link ID.*/
-//api/range?min={min}&max={max}&page={page}&count={count}
+// Gets a page of event data associated with a time range
+// /api/range?min={min}&max={max}&page={page}&count={count}
 router.get('/range', async (req, res) => {
   try{
     // Get the page and offset for the query
@@ -152,6 +157,8 @@ router.get('/range', async (req, res) => {
   }
 });
 
+// Counts the number of events associated with a time range
+// /count/range?min={min}&max={max}
 router.get('/count/range', async (req, res) => {
   try{
     //getting the range
