@@ -41,15 +41,13 @@ function secondsToTimeString (seconds) {
   return new Date(seconds * 1000).toISOString().slice(11, 19)
 }
 
-// TODO: only display the common attributes at first. When a user hits "show more", make a request to get the rest of the data
-// This would reduce the amount of null values in the initial request
 export default function LinkDetails({ data }) {
-  const [showMore, setShowMore] = useState(false);
-  const [loadMore, setLoadMore] = useState(false);
-  const [specialData, setSpecialData] = useState(null)
-  const [initialAttributes, setInitialAttributes] = useState([]);
-  const [extraAttributes, setExtraAttributes] = useState([]);
-  const [showToast, setShowToast] = useState (false)
+  const [showMore, setShowMore] = useState(false); // Shows the additional special attributes
+  const [loadMore, setLoadMore] = useState(false); // Loads the special attributes
+  const [specialData, setSpecialData] = useState(null) // Contains the special key/value pairs
+  const [initialAttributes, setInitialAttributes] = useState([]); // Contains the keys of the special values that are always shown
+  const [extraAttributes, setExtraAttributes] = useState([]); // Contains the keys of the special values that are hidden by default
+  const [showToast, setShowToast] = useState (false) // Shows the toast message after clicking the "show more" button
 
   function handleShowMore () {
     setShowMore(!showMore); // Toggle the show more button
@@ -59,7 +57,8 @@ export default function LinkDetails({ data }) {
     setLoadMore (true) // Disable the load more button
 
     let { event_type, event_id } = data
-    
+
+    // Retrieves the special attributes
     await axios.get(`/api/specialEventData/${encodeURIComponent(event_type)}/${event_id}`).then((response) => {
       setSpecialData (response.data)
       let specialAttributes = getEventAttributes(response.data)
