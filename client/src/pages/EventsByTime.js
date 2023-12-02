@@ -35,7 +35,8 @@ export default function EventsByTime() {
 
     let startSecond = convertToSeconds (startTime)
     let endSecond = convertToSeconds (endTime)
-    
+
+    // Retrieves a page of event data
     await axios.get(`/api/range?min=${startSecond}&max=${endSecond}&page=${page}&count=${itemsPerPage}`).then((response) => {
       setEventsData(response.data);
     }).catch ((err) => {
@@ -52,10 +53,11 @@ export default function EventsByTime() {
     let startSecond = convertToSeconds (startTime)
     let endSecond = convertToSeconds (endTime)
 
+    // Retrieves the total number of items for the search
     await axios.get(`/api/count/range?min=${startSecond}&max=${endSecond}`).then((response) => {
       setTotalEvents(response.data.count);
       if (page === 1) {
-        getData ()
+        getData () // The hook won't run if the page doesn't change, so we must do it manually
       }
       else {
         setPage (1)
