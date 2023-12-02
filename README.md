@@ -20,6 +20,24 @@ Run "cd ../server"
 
 Run "npm install" once again
 
+## Creating the database
+
+Download and install [pgAdmin](https://www.pgadmin.org/download/)
+
+Create a database named "transportProject" with the password set to "password"
+
+Run the database creation [script](https://github.com/KINGTUT10101/TransportationEventsProject/blob/main/database/scripts/postgreSQL_script.sql)
+
+Import the CSV files found in the [database/raw_data](https://github.com/KINGTUT10101/TransportationEventsProject/tree/main/database/raw_data) folder
+
+Download the events XML file from D2L and place it into the database/raw_data folder
+
+Run "cd database/scripts/import_events_data"
+
+Run "node --max-old-space-size=4096 transferToDB.js"
+
+Wait for the script to finish. It may take a while
+
 ## Running the project
 
 Run “npm run dev” in the project's root directory
