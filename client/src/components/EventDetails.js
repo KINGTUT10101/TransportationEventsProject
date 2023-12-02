@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { Typography, Box, Paper, Button, Divider } from '@mui/material';
+import { Typography, Box, Paper, Button, Divider, Snackbar, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 // Icons
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -48,6 +49,7 @@ export default function LinkDetails({ data }) {
   const [specialData, setSpecialData] = useState(null)
   const [initialAttributes, setInitialAttributes] = useState([]);
   const [extraAttributes, setExtraAttributes] = useState([]);
+  const [showToast, setShowToast] = useState (false)
 
   function handleShowMore () {
     setShowMore(!showMore); // Toggle the show more button
@@ -63,6 +65,10 @@ export default function LinkDetails({ data }) {
       let specialAttributes = getEventAttributes(response.data)
       setInitialAttributes (specialAttributes.slice(0, specialAttributeLimit))
       setExtraAttributes (specialAttributes.slice(specialAttributeLimit))
+
+      if (initialAttributes.length === 0) {
+        setShowToast (true)
+      }
 
     }).catch ((err) => {
       alert ("Error fetching data\n" + err)
@@ -139,7 +145,7 @@ export default function LinkDetails({ data }) {
           </Typography>
         ))}
 
-        {/* Show More button and Extra attributes */}
+        {/* Extra attributes */}
         {showMore &&
           extraAttributes.map(attr => (
             <Typography key={attr} align="left" variant="subtitle1" marginLeft="1rem">
@@ -148,18 +154,28 @@ export default function LinkDetails({ data }) {
           ))
         }
 
+        {/* Show more button */}
         {extraAttributes.length > 0 && (
           <Button onClick={handleShowMore}>
             {showMore ? 'Show Less' : 'Show More'}
           </Button>
         )}
 
+        {/* Load more button */}
         {!loadMore && (
           <Button onClick={handleLoadMore}>
             Load More
           </Button>
         )}
       </Paper>
+      
+      {/* Toast */}
+      <Snackbar
+        open={showToast}
+        autoHideDuration={1000}
+        onClose={()=>setShowToast(false)}
+        message="No more data to show!"
+      />
     </div>
   );
 }
