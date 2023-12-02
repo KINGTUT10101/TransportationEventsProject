@@ -21,7 +21,8 @@ export default function EventsByPerson() {
 
   async function getData () {
     setWaiting (true)
-    
+
+    // Retrieves a page of event data
     await axios.get(`/api/person/${encodeURIComponent(personID)}?page=${page}&count=${itemsPerPage}`).then((response) => {
       setEventsData(response.data);
     }).catch ((err) => {
@@ -35,11 +36,12 @@ export default function EventsByPerson() {
   async function newSearch () {
     setWaiting (true)
 
+    // Retrieves the total number of items for the search
     await axios.get(`/api/count/person/${personID}`).then((response) => {
       setTotalEvents(response.data.count);
 
       if (page === 1) {
-        getData ()
+        getData () // The hook won't run if the page doesn't change, so we must do it manually
       }
       else {
         setPage (1)
