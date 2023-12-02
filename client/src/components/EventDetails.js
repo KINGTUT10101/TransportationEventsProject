@@ -69,8 +69,9 @@ export default function LinkDetails({ data }) {
       if (specialAttributes.length === 0) {
         setShowToast (true)
       }
-
-      setShowMore (true)
+      else {
+        setShowMore (true)
+      }
 
     }).catch ((err) => {
       alert ("Error fetching data\n" + err)
