@@ -12,7 +12,6 @@ router.get('/specialEventData/:eventType/:eventID', async (req, res) => {
   try{
     const eid = req.params.eventID; // Event ID
     const sourceTable = typeMap[req.params.eventType] // Source table for special columns
-    console.log (req.params.eventType)
 
     const result = await db.query(`SELECT *
                                    FROM ${sourceTable}

@@ -1,6 +1,6 @@
 import { Typography, TextField, Grid, Pagination, Divider, Button } from '@mui/material';
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 
 import EventDetails from "../components/EventDetails"
 import WaitModal from '../components/WaitModal';
@@ -17,11 +17,12 @@ export default function EventsByLink() {
   const [eventsData, setEventsData] = React.useState([]);
   const [totalEvents, setTotalEvents] = React.useState(0);
   const [page, setPage] = React.useState(1)
+  const [firstRender, setFirstRender] = React.useState(true)
 
   async function getData () {
     setWaiting (true)
 
-    await axios.get(`/api/event/${encodeURIComponent(linkID)}`).then((response) => {
+    await axios.get(`/api/event/${encodeURIComponent(linkID)}?page=${page}&count=${itemsPerPage}`).then((response) => {
       setEventsData(response.data);
     }).catch ((err) => {
       alert ("Error fetching content (please check that the ID is correct)\n" + err)
@@ -34,9 +35,15 @@ export default function EventsByLink() {
   async function newSearch () {
     setWaiting (true)
 
-    await axios.get(`/api/count/event/${linkID}?page=${page}&count=${itemsPerPage}`).then((response) => {
+    await axios.get(`/api/count/event/${linkID}`).then((response) => {
       setTotalEvents(response.data.count);
-      getData ()
+      if (page === 1) {
+        getData ()
+      }
+      else {
+        setPage (1)
+        // Data will update automatically in the useEffect hook
+      }
     }).catch ((err) => {
       alert ("Error fetching content count (please check that the time range is correct)\n" + err)
       setEventsData ([])
@@ -48,8 +55,24 @@ export default function EventsByLink() {
   async function nextPage (event, value) {
     setPage (value)
     window.scrollTo(0, 0)
-    getData ()
+    // Data will update automatically in the useEffect hook
+    // This fixes a bug where users had to click the page twice to update the data
   }
+
+  React.useEffect (()=>{
+    if (firstRender){
+      setFirstRender (false)
+    }
+    else {
+      getData ()
+    }
+  }, [page])
+
+  React.useEffect (()=>{
+    if (!waiting) {
+      window.scrollTo(0, 0)
+    }
+  }, [waiting])
 
   return (
     <div>
@@ -70,7 +93,7 @@ export default function EventsByLink() {
       <div style={{display: "flex", justifyContent: "center"}}>
         <Button
           variant="contained"
-          onClick={getData}
+          onClick={newSearch}
         >
           Search
         </Button>

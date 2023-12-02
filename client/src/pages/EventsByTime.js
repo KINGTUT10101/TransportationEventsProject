@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { Typography, Grid, Pagination, Button, Divider } from '@mui/material';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 
 import EventDetails from "../components/EventDetails"
 import WaitModal from '../components/WaitModal';
@@ -28,6 +28,7 @@ export default function EventsByTime() {
   const [eventsData, setEventsData] = React.useState([]);
   const [totalEvents, setTotalEvents] = React.useState(0);
   const [page, setPage] = React.useState(1)
+  const [firstRender, setFirstRender] = React.useState(true)
 
   async function getData () {
     setWaiting (true)
@@ -53,7 +54,13 @@ export default function EventsByTime() {
 
     await axios.get(`/api/count/range?min=${startSecond}&max=${endSecond}`).then((response) => {
       setTotalEvents(response.data.count);
-      getData ()
+      if (page === 1) {
+        getData ()
+      }
+      else {
+        setPage (1)
+        // Data will update automatically in the useEffect hook
+      }
     }).catch ((err) => {
       alert ("Error fetching content count (please check that the time range is correct)\n" + err)
       setEventsData ([])
@@ -64,9 +71,24 @@ export default function EventsByTime() {
 
   async function nextPage (event, value) {
     setPage (value)
-    window.scrollTo(0, 0)
-    getData ()
+    // Data will update automatically in the useEffect hook
+    // This fixes a bug where users had to click the page twice to update the data
   }
+
+  React.useEffect (()=>{
+    if (firstRender){
+      setFirstRender (false)
+    }
+    else {
+      getData ()
+    }
+  }, [page])
+
+  React.useEffect (()=>{
+    if (!waiting) {
+      window.scrollTo(0, 0)
+    }
+  }, [waiting])
   
   return (
     <div>
