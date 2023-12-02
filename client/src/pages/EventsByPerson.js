@@ -108,7 +108,7 @@ export default function EventsByPerson() {
 
           <Grid container padding={2} alignItems="flex-start" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center">
             {eventsData.map((item) => (
-              <Grid item xs={2} sm={3} md={4}>
+              <Grid item xs={2} sm={3} md={4} key={item.event_id}>
                 <EventDetails data={item} />
               </Grid>
             ))}

@@ -66,9 +66,11 @@ export default function LinkDetails({ data }) {
       setInitialAttributes (specialAttributes.slice(0, specialAttributeLimit))
       setExtraAttributes (specialAttributes.slice(specialAttributeLimit))
 
-      if (initialAttributes.length === 0) {
+      if (specialAttributes.length === 0) {
         setShowToast (true)
       }
+
+      setShowMore (true)
 
     }).catch ((err) => {
       alert ("Error fetching data\n" + err)
