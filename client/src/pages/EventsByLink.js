@@ -5,6 +5,8 @@ import React from "react";
 import EventDetails from "../components/EventDetails"
 import WaitModal from '../components/WaitModal';
 
+const itemsPerPage = 32
+
 /**
  * Allows users to search for events by a link ID
  * @returns {JSX.Element} A EventsByLink component.
@@ -13,11 +15,13 @@ export default function EventsByLink() {
   const [waiting, setWaiting] = React.useState(false);
   const [linkID, setLinkID] = React.useState("");
   const [eventsData, setEventsData] = React.useState([]);
+  const [totalEvents, setTotalEvents] = React.useState(0);
+  const [page, setPage] = React.useState(1)
 
   async function getData () {
     setWaiting (true)
 
-    await axios.get(`/api/event/${linkID}`).then((response) => {
+    await axios.get(`/api/event/${encodeURIComponent(linkID)}`).then((response) => {
       setEventsData(response.data);
     }).catch ((err) => {
       alert ("Error fetching content (please check that the ID is correct)\n" + err)
@@ -25,6 +29,26 @@ export default function EventsByLink() {
     })
 
     setWaiting (false)
+  }
+
+  async function newSearch () {
+    setWaiting (true)
+
+    await axios.get(`/api/count/event/${linkID}?page=${page}&count=${itemsPerPage}`).then((response) => {
+      setTotalEvents(response.data.count);
+      getData ()
+    }).catch ((err) => {
+      alert ("Error fetching content count (please check that the time range is correct)\n" + err)
+      setEventsData ([])
+    })
+
+    setWaiting (false)
+  }
+
+  async function nextPage (event, value) {
+    setPage (value)
+    window.scrollTo(0, 0)
+    getData ()
   }
 
   return (
@@ -52,18 +76,22 @@ export default function EventsByLink() {
         </Button>
       </div>
 
-      <Divider style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
+      {
+        eventsData.length > 0 &&
+        <div>
+          <Divider style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
 
-      <Grid container padding={2} alignItems="flex-start" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center">
-        {eventsData.map((item) => (
-          <Grid item xs={2} sm={3} md={4}>
-            <EventDetails data={item} />
+          <Grid container padding={2} alignItems="flex-start" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center">
+            {eventsData.map((item) => (
+              <Grid item xs={2} sm={3} md={4}>
+                <EventDetails data={item} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-
-      <Pagination count={10} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}} />
-    
+          <Pagination count={Math.ceil (totalEvents / itemsPerPage)} page={page} onChange={nextPage} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}} />
+        </div>
+      }
+      
       <WaitModal open={waiting} />
     </div>
   )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import { Typography, Box, Paper, Button, Divider } from '@mui/material';
 
 // Icons
@@ -18,6 +19,7 @@ const blacklistedAttributes = new Set([
   "vehicle",
   "event_id"
 ])
+const specialAttributeLimit = 0
 
 /**
  * Extracts event attributes that are not common or blacklisted into an array
@@ -42,12 +44,31 @@ function secondsToTimeString (seconds) {
 // This would reduce the amount of null values in the initial request
 export default function LinkDetails({ data }) {
   const [showMore, setShowMore] = useState(false);
-  const attributesToShow = getEventAttributes(data);
-  const initialAttributes = attributesToShow.slice(0, 5);
-  const extraAttributes = attributesToShow.slice(5);
+  const [loadMore, setLoadMore] = useState(false);
+  const [specialData, setSpecialData] = useState(null)
+  const [initialAttributes, setInitialAttributes] = useState([]);
+  const [extraAttributes, setExtraAttributes] = useState([]);
 
-  const handleShowMore = () => {
-    setShowMore(!showMore);
+  function handleShowMore () {
+    setShowMore(!showMore); // Toggle the show more button
+  };
+
+  async function handleLoadMore () {
+    setLoadMore (true) // Disable the load more button
+
+    let { event_type, event_id } = data
+    
+    await axios.get(`/api/specialEventData/${encodeURIComponent(event_type)}/${event_id}`).then((response) => {
+      setSpecialData (response.data)
+      let specialAttributes = getEventAttributes(response.data)
+      setInitialAttributes (specialAttributes.slice(0, specialAttributeLimit))
+      setExtraAttributes (specialAttributes.slice(specialAttributeLimit))
+
+    }).catch ((err) => {
+      alert ("Error fetching data\n" + err)
+      setInitialAttributes ([])
+      setExtraAttributes ([])
+    })
   };
 
   return (
@@ -107,14 +128,14 @@ export default function LinkDetails({ data }) {
         }
 
         {
-          initialAttributes.length > 0 &&
+          showMore &&
           <Divider style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }} />
         }
 
         {/* Initial attributes */}
         {initialAttributes.map(attr => (
           <Typography key={attr} align="left" variant="subtitle1" marginLeft="1rem">
-            {attr}: {data[attr]}
+            {attr}: {specialData[attr]}
           </Typography>
         ))}
 
@@ -122,12 +143,20 @@ export default function LinkDetails({ data }) {
         {showMore &&
           extraAttributes.map(attr => (
             <Typography key={attr} align="left" variant="subtitle1" marginLeft="1rem">
-              {attr}: {data[attr]}
+              {attr}: {specialData[attr]}
             </Typography>
-          ))}
+          ))
+        }
+
         {extraAttributes.length > 0 && (
           <Button onClick={handleShowMore}>
             {showMore ? 'Show Less' : 'Show More'}
+          </Button>
+        )}
+
+        {!loadMore && (
+          <Button onClick={handleLoadMore}>
+            Load More
           </Button>
         )}
       </Paper>
