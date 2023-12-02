@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node --watch index.js"
+    "server": "node --watch --max-old-space-size=4096 index.js"
   },
   "author": "",
   "license": "MIT",

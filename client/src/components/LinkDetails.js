@@ -11,7 +11,7 @@ import SendIcon from '@mui/icons-material/Send';
 import MultipleStopIcon from '@mui/icons-material/MultipleStop';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
-export default function LinkDetails () {
+export default function LinkDetails ({ data }) {
   return (
     <div>
       <Paper elevation={20} style={{padding: "0.5rem"}}>
@@ -23,7 +23,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <FingerprintIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            ID: 44422996
+            ID: {data.link_id}
           </Typography>
         </Box>
 
@@ -31,7 +31,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <LocationOnIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            From Node ID: 551212
+            From Node ID: {data.from_node}
           </Typography>
         </Box>
 
@@ -39,7 +39,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <PinDropIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            To Node ID: 774343
+            To Node ID: {data.to_node}
           </Typography>
         </Box>
 
@@ -47,7 +47,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <StraightenIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Length: 453 units
+            Length: {Math.round (data.link_length * 100) / 100} units
           </Typography>
         </Box>
 
@@ -55,7 +55,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <SpeedIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Freespeed: 33 units/time
+            Freespeed: {Math.round (data.freespeed * 100) / 100} units/time
           </Typography>
         </Box>
 
@@ -63,7 +63,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <GroupsIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Max capacity: 466
+            Max capacity: {data.capacity}
           </Typography>
         </Box>
 
@@ -71,7 +71,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <SendIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Number of permlanes: 1
+            Number of permlanes: {data.permlanes}
           </Typography>
         </Box>
 
@@ -79,7 +79,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <MultipleStopIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Oneway: Yes
+            Oneway: {data.oneway ? "Yes" : "No"}
           </Typography>
         </Box>
 
@@ -87,7 +87,7 @@ export default function LinkDetails () {
         <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
           <DirectionsCarIcon />
           <Typography align="left" variant="subtitle1" paddingX={1}>
-            Modes: car
+            Modes: {data.modes}
           </Typography>
         </Box>
       </Paper>
