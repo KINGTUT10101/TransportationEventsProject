@@ -25,9 +25,9 @@ export default function EventsByTime() {
   const [waiting, setWaiting] = React.useState(false);
   const [startTime, setStartTime] = React.useState(dayjs ().set('hour', 9).set('minute', 0).set('second', 0));
   const [endTime, setEndTime] = React.useState(dayjs ().set('hour', 17).set('minute', 0).set('second', 0));
-  const [eventsData, setEventsData] = React.useState([]);
-  const [totalEvents, setTotalEvents] = React.useState(0);
-  const [page, setPage] = React.useState(1)
+  const [eventsData, setEventsData] = React.useState([]); // Contains the data from the server
+  const [totalEvents, setTotalEvents] = React.useState(0); // The total number of events for the search
+  const [page, setPage] = React.useState(1) // The current page of data to view
   const [firstRender, setFirstRender] = React.useState(true)
 
   async function getData () {
