@@ -9,13 +9,14 @@ import WaitModal from '../components/WaitModal';
  * @returns {JSX.Element} A SearchForLink component.
  */
 export default function SearchForLink() {
-  const [waiting, setWaiting] = React.useState(false);
-  const [linkID, setLinkID] = React.useState("");
-  const [linkData, setLinkData] = React.useState(null);
+  const [waiting, setWaiting] = React.useState(false); // Shows the loading modal
+  const [linkID, setLinkID] = React.useState(""); // The search bar text
+  const [linkData, setLinkData] = React.useState(null); // The data returned from the server
 
   async function getData () {
     setWaiting (true)
 
+    // Retrieves the link data
     await axios.get(`/api/link/${linkID}`).then((response) => {
       setLinkData(response.data);
     }).catch ((err) => {
