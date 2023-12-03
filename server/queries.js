@@ -8,8 +8,15 @@ process.on('uncaughtException', function (err) {
   console.log(err);
 });
 
-// Used to get the special attributes for an event
-// /specialEventData/{eventType}/{eventID}
+/**
+ * Used to get the special attributes for an event
+ * @function /api/specialEventData/:eventType/:eventID
+ * @category Routes
+ * @route {GET} /api/specialEventData/{eventType}/{eventID}
+ * @routeparam {String} eventType The type of event requested
+ * @routeparam {String} eventID The ID of a particular event
+ * @returns An array of the requested event attributes or a string containing an error message
+ */
 router.get('/specialEventData/:eventType/:eventID', async (req, res) => {
   try{
     const eid = req.params.eventID; // Event ID
@@ -27,8 +34,16 @@ router.get('/specialEventData/:eventType/:eventID', async (req, res) => {
   }
 });
 
-// Gets a page of event data associated with a person ID
-// /person/{personID}?page={page}&count={count}
+/**
+ * Gets a page of event data associated with a person ID
+ * @function /api/person/:personID
+ * @category Routes
+ * @route {GET} /api/person/{personID}?page={page}&count={count}
+ * @routeparam {String} :personID The ID of a particular person
+ * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
+ * @queryparam {number} count The number of comments to fetch from the database, aka, the number of items per page
+ * @returns An array of event data or a string containing an error message
+ */
 router.get('/person/:personID', async (req, res) => {
   try{
     // Get the page and offset for the query
@@ -52,8 +67,14 @@ router.get('/person/:personID', async (req, res) => {
   }
 });
 
-// Counts the number of events associated with a person ID
-// /count/person/{personID}
+/**
+ * Counts the number of events associated with a person ID
+ * @function /api/count/person/:personID
+ * @category Routes
+ * @route {GET} /api/count/person/{personID}
+ * @routeparam {String} The ID of a particular person
+ * @returns An array containing the number of events associated with a person ID or a string containing an error message
+ */
 router.get('/count/person/:personID', async (req, res) => {
   try{
     const pid = req.params.personID;
@@ -69,8 +90,16 @@ router.get('/count/person/:personID', async (req, res) => {
   }
 });
 
-// Gets a page of event data associated with a link ID
-// /event/{linkID}?page={page}&count={count}
+/**
+ * Gets a page of event data associated with a link ID
+ * @function /api/event/:linkID
+ * @category Routes
+ * @route {GET} /api/event/{linkID}?page={page}&count={count}
+ * @routeparam {String} :linkID The ID of a particular link
+ * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
+ * @queryparam {number} count The number of comments to fetch from the database, aka, the number of items per page
+ * @returns An array of event data or a string containing an error message
+ */
 router.get('/event/:linkID', async (req, res) => {
   try{
     // Get the page and offset for the query
@@ -94,8 +123,14 @@ router.get('/event/:linkID', async (req, res) => {
   }
 });
 
-// Counts the number of events associated with a link ID
-// /count/event/{linkID}
+/**
+ * Counts the number of events associated with a link ID
+ * @function /api/count/event/:linkID
+ * @category Routes
+ * @route {GET} /api/count/event/{linkID}
+ * @routeparam {String} The ID of a particular link
+ * @returns An array containing the number of events associated with a link ID or a string containing an error message
+ */
 router.get('/count/event/:linkID', async (req, res) => {
   try{
     const lid = req.params.linkID;
@@ -111,8 +146,14 @@ router.get('/count/event/:linkID', async (req, res) => {
   }
 });
 
-// Gets the data of a specific link
-// /link/{linkID}
+/**
+ * Gets the data of a specific link
+ * @function /api/link/:linkID
+ * @category Routes
+ * @route {GET} /api/link/{linkID}
+ * @routeparam {String} :linkID The ID of a particular link
+ * @returns An array of link data or a string containing an error message
+ */
 router.get('/link/:linkID', async (req, res) => {
   try{
     const lid = req.params.linkID;
@@ -128,8 +169,17 @@ router.get('/link/:linkID', async (req, res) => {
   }
 });
 
-// Gets a page of event data associated with a time range
-// /api/range?min={min}&max={max}&page={page}&count={count}
+/**
+ * Gets a page of event data associated with a time range
+ * @function /api/range
+ * @category Routes
+ * @route {GET} /api/range?min={min}&max={max}&page={page}&count={count}
+ * @queryparam {number} min The time in seconds where the time range begins
+ * @queryparam {number} max The time in seconds where the time range ends
+ * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
+ * @queryparam {number} count The number of comments to fetch from the database, aka, the number of items per page
+ * @returns An array of event data or a string containing an error message
+ */
 router.get('/range', async (req, res) => {
   try{
     // Get the page and offset for the query
@@ -157,8 +207,15 @@ router.get('/range', async (req, res) => {
   }
 });
 
-// Counts the number of events associated with a time range
-// /count/range?min={min}&max={max}
+/**
+ * Counts the number of events associated with a time range
+ * @function /api/count/range
+ * @category Routes
+ * @route {GET} /api/count/range?min={min}&max={max}
+ * @queryparam {number} min The time in seconds where the time range begins
+ * @queryparam {number} max The time in seconds where the time range ends
+ * @returns An array containing the number of events associated with a time range or a string containing an error message
+ */
 router.get('/count/range', async (req, res) => {
   try{
     //getting the range
