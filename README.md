@@ -1,6 +1,9 @@
 # Transportation Events Project
 
-The final project for Database Theory and Design
+The final project for Database Theory and Design. It provides an easy way for users to view a set of events data for a transportation system.
+
+![image](https://github.com/KINGTUT10101/TransportationEventsProject/assets/45105509/3f2a56a1-f5d8-4420-9ee1-e1c35f83a3b4)
+![image](https://github.com/KINGTUT10101/TransportationEventsProject/assets/45105509/26370aa5-981e-436e-9232-7291269b97a9)
 
 ## Installation
 
